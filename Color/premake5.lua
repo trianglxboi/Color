@@ -39,6 +39,10 @@ project "Color"
 		{
 			"Source/Platform/Linux/**.cpp"
 		}
+		links
+		{
+			"Shlwapi.lib"
+		}
 
 	filter "system:linux"
 		defines
