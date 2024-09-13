@@ -3,6 +3,19 @@
 
 namespace Color
 {
+	const char* BuildConfigToString(BuildConfig config)
+	{
+		switch (config)
+		{
+		case BuildConfig::Development: return "Development";
+		case BuildConfig::Preview:     return "Preview";
+		case BuildConfig::Shipping:    return "Shipping";
+		}
+
+		// TODO: unreachable code block
+		return nullptr;
+	}
+
 	const char* PlatformToString(Platforms platform)
 	{
 		switch (platform)

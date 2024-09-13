@@ -6,6 +6,9 @@
 Binaries/
 Binaries-Int/
 
+# Log Outputs
+*.log
+
 # Generated Project Files
 *.sln
 *.vcxproj

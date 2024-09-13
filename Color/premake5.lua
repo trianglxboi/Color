@@ -18,7 +18,10 @@ project "Color"
 	includedirs
 	{
 		"Source",
-		"Source/Color"
+		"Source/Color",
+
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.glm}"
 	}
 
 	filter "architecture:x64"

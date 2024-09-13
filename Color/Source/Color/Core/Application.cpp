@@ -1,6 +1,8 @@
 #include "ColorPCH.h"
 #include "Application.h"
 
+#include "Core/Log.h"
+
 namespace Color
 {
 	Application::Application(const ApplicationSpecification& specification, const CommandLine& cmdline)
@@ -8,6 +10,17 @@ namespace Color
 	{
 		// TODO: Assert !s_Instance
 		s_Instance = this;
+
+		Log::Init();
+		CL_CORE_INFO("Initialized logging.");
+
+		CL_CORE_INFO("Engine Build Info:");
+		CL_CORE_INFO("  Build Configuration -> {} (test? = {})", BuildConfigToString(c_BuildConfig), c_IsTestBuild);
+		CL_CORE_INFO("  Platform            -> {}-{} ({})", PlatformToString(c_Platform), PlatformArchitectureToString(c_PlatformArchitecture), PlatformStabilityToString(c_PlatformStability));
+		CL_CORE_INFO("  Compiler Info:");
+		CL_CORE_INFO("    Compiler         -> {} ({})", GetCompilerName(c_Compiler), GetCompilerAbbreviation(c_Compiler));
+		CL_CORE_INFO("    Compilation Date -> {}", __DATE__);
+		CL_CORE_INFO("    Compilation Time -> {}", __TIME__);
 
 		// TODO: Handle working directory
 	}
@@ -24,7 +37,7 @@ namespace Color
 	{
 		if (m_Running)
 		{
-			// TODO: warn
+			CL_CORE_WARN("Tried to call Run() on an already running Application. Discarding request.");
 			return;
 		}
 
@@ -46,7 +59,7 @@ namespace Color
 	{
 		if (!m_Running)
 		{
-			// TODO: warn
+			CL_CORE_WARN("Tried to call Quit() on an already non-running Application. Discarding request.");
 			return;
 		}
 

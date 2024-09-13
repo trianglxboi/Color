@@ -11,6 +11,8 @@ namespace Color
 		Shipping
 	};
 
+	const char* BuildConfigToString(BuildConfig config);
+
 	#ifdef CL_DEVELOPMENT
 		inline constexpr BuildConfig c_BuildConfig = BuildConfig::Development;
 	#elif defined CL_PREVIEW
