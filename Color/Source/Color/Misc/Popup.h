@@ -2,6 +2,9 @@
 
 #include "Core/Base.h"
 
+#include <string_view>
+#include <string>
+
 namespace Color
 {
 	// NOTE: Color's Popup API is heavily designed after Windows' MessageBoxes. Windows implementation will be very straight forward.

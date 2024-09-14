@@ -1,14 +1,14 @@
 #include "ColorPCH.h"
 #include "Application.h"
 
-#include "Core/Log.h"
+#include "Utils/FileSystem.h"
 
 namespace Color
 {
 	Application::Application(const ApplicationSpecification& specification, const CommandLine& cmdline)
 		: m_Specification(specification), m_Cmdline(cmdline)
 	{
-		// TODO: Assert !s_Instance
+		checkf(!s_Instance, "An application instance already exists!");
 		s_Instance = this;
 
 		Log::Init();
@@ -22,7 +22,25 @@ namespace Color
 		CL_CORE_INFO("    Compilation Date -> {}", __DATE__);
 		CL_CORE_INFO("    Compilation Time -> {}", __TIME__);
 
-		// TODO: Handle working directory
+		if (!m_Specification.WorkingDir.empty())
+		{
+			std::string initialWdir = FileSystem::GetWorkingDirectory();
+			std::string specWdir = FileSystem::Abs(m_Specification.WorkingDir);
+
+			if (initialWdir != specWdir)
+			{
+				if (FileSystem::IsDirectory(specWdir))
+				{
+					CL_CORE_WARN("Application specification requested a different working directory, changing...");
+					FileSystem::SetWorkingDirectory(specWdir);
+					CL_CORE_INFO("Changed the working directory '{}' -> '{}'", initialWdir, specWdir);
+				}
+				else
+				{
+					CL_CORE_ERROR("Application specification specified a custom working directory '{}', but the said path either doesn't exist or is not a directory.", m_Specification.WorkingDir);
+				}
+			}
+		}
 	}
 
 	Application::~Application()

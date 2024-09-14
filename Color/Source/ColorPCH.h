@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Core/Assert.h"
+
 #ifdef CL_PLATFORM_WINDOWS
 	#include <Windows.h>
 #elif defined CL_PLATFORM_LINUX

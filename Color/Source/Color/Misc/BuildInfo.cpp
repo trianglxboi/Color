@@ -12,7 +12,7 @@ namespace Color
 		case BuildConfig::Shipping:    return "Shipping";
 		}
 
-		// TODO: unreachable code block
+		unreachable();
 		return nullptr;
 	}
 
@@ -24,7 +24,7 @@ namespace Color
 		case Platforms::Linux:   return "Linux";
 		}
 
-		// TODO: unreachable code block
+		unreachable();
 		return nullptr;
 	}
 
@@ -36,7 +36,7 @@ namespace Color
 		case PlatformStability::Experimental: return "Experimental";
 		}
 
-		// TODO: unreachable code block
+		unreachable();
 		return nullptr;
 	}
 
@@ -47,7 +47,7 @@ namespace Color
 		case PlatformArchitecture::x64: return "x64";
 		}
 
-		// TODO: unreachable code block
+		unreachable();
 		return nullptr;
 	}
 
@@ -60,7 +60,7 @@ namespace Color
 		case Compilers::GCC:   return "GNU C++ Compiler";
 		}
 
-		// TODO: unreachable code block
+		unreachable();
 		return nullptr;
 	}
 
@@ -73,7 +73,7 @@ namespace Color
 		case Compilers::GCC:   return "GCC";
 		}
 
-		// TODO: unreachable code block
+		unreachable();
 		return nullptr;
 	}
 }
