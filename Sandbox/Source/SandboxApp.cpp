@@ -3,9 +3,6 @@
 // >>> Entry Point Declared & Implemented Here <<< //
 #include "Core/EntryPoint.h"
 
-#include "Core/Assert.h"
-#include "Misc/Random.h"
-
 namespace Sandbox
 {
 	SandboxApp::SandboxApp(const Color::ApplicationSpecification& specification, const Color::CommandLine& cmdline)
