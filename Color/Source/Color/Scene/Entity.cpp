@@ -1,7 +1,7 @@
 #include "ColorPCH.h"
 #include "Entity.h"
 
-#include "Components/NameComponent.h"
+#include "Scene/Components.h"
 #include "Scene/Scene.h"
 
 namespace Color

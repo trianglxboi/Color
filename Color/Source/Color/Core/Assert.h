@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Log.h"
+#include "Misc/MiscDefines.h"
 
 #ifdef CL_PLATFORM_WINDOWS
 	#define CL_DEBUGBREAK_BASE() __debugbreak()

@@ -1,6 +1,8 @@
 #include "ColorPCH.h"
 #include "Popup.h"
 
+#include "Core/Base.h"
+
 #include "Platform/Windows/WindowsPopup.h"
 #include "Platform/Linux/LinuxPopup.h"
 

@@ -1,8 +1,7 @@
 #include "ColorPCH.h"
 #include "Scene.h"
 
-#include "Components/TransformComponent.h"
-#include "Components/NameComponent.h"
+#include "Scene/Components.h"
 
 namespace Color
 {
@@ -25,6 +24,13 @@ namespace Color
 		{
 			return;
 		}
+
+		if (!m_Paused)
+		{
+			// Update stuff that happen only during m_Paused=false.
+		}
+
+		// Update stuff that happen even during pauses.
 	}
 
 	void Scene::StopRuntime()
@@ -34,6 +40,7 @@ namespace Color
 
 	void Scene::SetPaused(bool paused)
 	{
+		m_Paused = paused;
 	}
 
 	Entity Scene::CreateRawEntity()

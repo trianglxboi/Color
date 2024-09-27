@@ -12,6 +12,7 @@ ThirdPartyDir = "%{ProjectDir.Color}/ThirdParty"
 IncludeDir = {}
 IncludeDir["Color"] = "%{ProjectDir.Color}/Source/Color"
 IncludeDir["Sandbox"] = "%{ProjectDir.Sandbox}/Source"
+IncludeDir["fmt"] = "%{ThirdPartyDir}/fmt/include"
 IncludeDir["spdlog"] = "%{ThirdPartyDir}/spdlog/include"
 IncludeDir["glm"] = "%{ThirdPartyDir}/glm"
 

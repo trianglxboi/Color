@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core/Base.h"
-
-#include <string>
+#include "Core/LayerStack.h"
+#include "EventSystem/AppEvent.h"
+#include "EventSystem/Event.h"
 
 namespace Color
 {
@@ -22,6 +22,12 @@ namespace Color
 		void Quit();
 		void Exit(int exitcode = 0);
 
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
+
+		void PopLayer(Layer* layer, bool disown = false);
+		void PopOverlay(Layer* overlay, bool disown = false);
+
 		const ApplicationSpecification& GetSpecification() const { return m_Specification; }
 		const CommandLine& GetCmdline() const { return m_Cmdline; }
 
@@ -30,10 +36,15 @@ namespace Color
 		static Application* Get() { return s_Instance; }
 	private:
 		void CleanUp();
+
+		void OnEvent(Event& e);
+		bool OnWindowClose(WindowClosedEvent& e);
+		bool OnWindowResize(WindowResizedEvent& e);
 	private:
 		ApplicationSpecification m_Specification;
 		CommandLine m_Cmdline;
 
+		LayerStack m_LayerStack;
 		bool m_Running = false;
 	private:
 		inline static Application* s_Instance = nullptr;

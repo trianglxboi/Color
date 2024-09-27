@@ -1,10 +1,13 @@
 #pragma once
 
-#include "Core/Base.h"
 #include "Misc/Popup.h"
 
 #define SPDLOG_LEVEL_NAMES { "trace", "__unused__", "info", "warn", "error", "fatal", "off" } 
 #define SPDLOG_SHORT_LEVEL_NAMES { "T", "__UNUSED__", "I", "W", "E", "F", "O" } 
+
+#define SPDLOG_FMT_EXTERNAL
+#define FMT_DEPRECATED_OSTREAM
+#define FMT_HEADER_ONLY
 
 #pragma warning(push, 0) // Disable warnings coming from spdlog headers (all warnings disabled until they're popped)
 	#include <spdlog/spdlog.h>
@@ -59,11 +62,11 @@ inline OStream& operator<<(OStream& stream, const glm::qua<T, Q>& quat)
 }
 
 #ifdef CL_TEST_BUILD
-	#define CL_LOGGER_TRACE(pLogger, ...)   pLogger->trace(__VA_ARGS__)
-	#define CL_LOGGER_INFO(pLogger, ...)    pLogger->info(__VA_ARGS__)
-	#define CL_LOGGER_WARN(pLogger, ...)    pLogger->warn(__VA_ARGS__)
-	#define CL_LOGGER_ERROR(pLogger, ...)   pLogger->error(__VA_ARGS__)
-	#define CL_LOGGER_FATAL(pLogger, ...) { pLogger->critical(__VA_ARGS__); ::exit(1); }
+	#define CL_LOGGER_TRACE(pLogger, ...)   pLogger->log(spdlog::level::trace,    __VA_ARGS__);
+	#define CL_LOGGER_INFO(pLogger, ...)    pLogger->log(spdlog::level::info,     __VA_ARGS__);
+	#define CL_LOGGER_WARN(pLogger, ...)    pLogger->log(spdlog::level::warn,     __VA_ARGS__);
+	#define CL_LOGGER_ERROR(pLogger, ...)   pLogger->log(spdlog::level::err,      __VA_ARGS__);
+	#define CL_LOGGER_FATAL(pLogger, ...) { pLogger->log(spdlog::level::critical, __VA_ARGS__); ::exit(1); }
 #else
 	#define CL_LOGGER_TRACE(pLogger, ...)
 	#define CL_LOGGER_INFO(pLogger, ...)

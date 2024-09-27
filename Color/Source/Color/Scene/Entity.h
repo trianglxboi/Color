@@ -56,7 +56,7 @@ namespace Color
 		template <typename T>
 		bool HasComponent()
 		{
-			return m_Ref->HasComponent<T>();
+			return GetRef()->HasComponent<T>();
 		}
 
 		// Returns "GetComponent<NameComponent>().Name" if "HasComponent<NameComponent>()" evaluates to true, returns "Color::Entity::NO_NAME_COMPONENT_FOUND" otherwise.

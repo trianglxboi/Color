@@ -17,6 +17,7 @@ project "Sandbox"
 		"%{SourceDir.Color}",
 		"Source",
 
+		"%{IncludeDir.fmt}",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.glm}"
 	}
@@ -38,7 +39,10 @@ project "Sandbox"
 		defines
 		{
 			"CL_PLATFORM_WINDOWS",
-			"CL_STABLE_PLATFORM"
+			"CL_STABLE_PLATFORM",
+
+			"_CRT_SECURE_NO_WARNINGS",
+			"_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS"
 		}
 
 	filter "system:linux"

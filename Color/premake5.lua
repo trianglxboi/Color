@@ -20,6 +20,7 @@ project "Color"
 		"Source",
 		"Source/Color",
 
+		"%{IncludeDir.fmt}",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.glm}"
 	}
@@ -36,7 +37,10 @@ project "Color"
 		defines
 		{
 			"CL_PLATFORM_WINDOWS",
-			"CL_STABLE_PLATFORM"
+			"CL_STABLE_PLATFORM",
+
+			"_CRT_SECURE_NO_WARNINGS",
+			"_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS"
 		}
 		removefiles
 		{

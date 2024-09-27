@@ -3,11 +3,14 @@
 // >>> Entry Point Declared & Implemented Here <<< //
 #include "Core/EntryPoint.h"
 
+#include "Sandbox2D.h"
+
 namespace Sandbox
 {
 	SandboxApp::SandboxApp(const Color::ApplicationSpecification& specification, const Color::CommandLine& cmdline)
 		: Color::Application(specification, cmdline)
 	{
+		PushLayer(new Sandbox2D());
 	}
 
 	SandboxApp::~SandboxApp()

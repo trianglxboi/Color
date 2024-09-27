@@ -63,7 +63,17 @@ namespace Color
 
 		while (m_Running)
 		{
+			// TODO: Calculate timestep between frames. For now, we pass 0 as timestep as placeholder.
 
+			for (Layer* layer : m_LayerStack)
+			{
+				layer->OnUpdate(0.0f);
+			}
+
+			for (Layer* layer : m_LayerStack)
+			{
+				layer->OnRender();
+			}
 		}
 
 		CleanUp();
@@ -71,6 +81,42 @@ namespace Color
 
 	void Application::CleanUp()
 	{
+		// Delete leftover layers
+		for (Layer* layer : m_LayerStack)
+		{
+			layer->OnDetach();
+			delete layer;
+		}
+		m_LayerStack = LayerStack{}; // Will deconstruct old layer stack (so the vector gets cleared)
+	}
+
+	void Application::OnEvent(Event& e)
+	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowClosedEvent>(CL_BIND_METHOD(OnWindowClose));
+		dispatcher.Dispatch<WindowResizedEvent>(CL_BIND_METHOD(OnWindowResize));
+
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); it++)
+		{
+			if (e.Handled)
+			{
+				break;
+			}
+
+			(*it)->OnEvent(e);
+		}
+	}
+
+	bool Application::OnWindowClose(WindowClosedEvent& e)
+	{
+		Quit();
+		return true;
+	}
+
+	bool Application::OnWindowResize(WindowResizedEvent& e)
+	{
+		// TODO: Resize stuff
+		return false;
 	}
 
 	void Application::Quit()
@@ -88,5 +134,25 @@ namespace Color
 	{
 		// TODO: Use PlatformUtils when we have one.
 		std::exit(exitcode);
+	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* overlay)
+	{
+		m_LayerStack.PushOverlay(overlay);
+	}
+
+	void Application::PopLayer(Layer* layer, bool disown)
+	{
+		m_LayerStack.PopLayer(layer);
+	}
+
+	void Application::PopOverlay(Layer* overlay, bool disown)
+	{
+		m_LayerStack.PopOverlay(overlay);
 	}
 }

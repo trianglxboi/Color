@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Base.h"
+#include "Misc/SmartPtrs.h"
 
 #include <string_view>
 #include <string>
