@@ -20,7 +20,6 @@ namespace Sandbox
 
 	void Sandbox2D::OnEvent(Color::Event& e)
 	{
-		CL_ERROR("Sandbox2D::OnEvent - {}", e);
 	}
 
 	void Sandbox2D::OnUpdate(Color::Timestep ts)

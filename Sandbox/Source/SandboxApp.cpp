@@ -22,6 +22,7 @@ Color::Application* Color::CreateApplication(const Color::CommandLine& cmdline)
 {
 	ApplicationSpecification specification;
 	specification.Name = "Sandbox";
+	specification.MainWindowProps.Title = specification.Name;
 
 	return new Sandbox::SandboxApp(specification, cmdline);
 }

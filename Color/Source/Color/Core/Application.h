@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Core/LayerStack.h"
+#include "Core/Window.h"
+
 #include "EventSystem/AppEvent.h"
 #include "EventSystem/Event.h"
 
@@ -10,6 +12,8 @@ namespace Color
 	{
 		std::string Name;
 		std::string WorkingDir;
+
+		WindowProps MainWindowProps;
 	};
 
 	class Application
@@ -31,6 +35,7 @@ namespace Color
 		const ApplicationSpecification& GetSpecification() const { return m_Specification; }
 		const CommandLine& GetCmdline() const { return m_Cmdline; }
 
+		Window* GetMainWindow() const { return m_MainWindow.get(); }
 		bool IsRunning() const { return false; }
 
 		static Application* Get() { return s_Instance; }
@@ -44,7 +49,10 @@ namespace Color
 		ApplicationSpecification m_Specification;
 		CommandLine m_Cmdline;
 
+		Scope<Window> m_MainWindow;
 		LayerStack m_LayerStack;
+
+		float m_LastFrameTime = 0.0f;
 		bool m_Running = false;
 	private:
 		inline static Application* s_Instance = nullptr;

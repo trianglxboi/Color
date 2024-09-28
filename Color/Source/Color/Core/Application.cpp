@@ -1,6 +1,9 @@
 #include "ColorPCH.h"
 #include "Application.h"
 
+#include "Renderer/Renderer.h"
+
+#include "Utils/PlatformUtils.h"
 #include "Utils/FileSystem.h"
 
 namespace Color
@@ -41,6 +44,18 @@ namespace Color
 				}
 			}
 		}
+
+		m_MainWindow = Window::Create(m_Specification.MainWindowProps);
+		if (!m_MainWindow || !m_MainWindow->Init())
+		{
+			CL_CORE_FATAL("Application main window creation failure!");
+		}
+		m_MainWindow->SetEventCallback(CL_BIND_METHOD(OnEvent));
+		CL_CORE_INFO("Main window created successfully.");
+
+		
+		Renderer::Init();
+		CL_CORE_INFO("Initialized rendering engine.");
 	}
 
 	Application::~Application()
@@ -63,17 +78,21 @@ namespace Color
 
 		while (m_Running)
 		{
-			// TODO: Calculate timestep between frames. For now, we pass 0 as timestep as placeholder.
+			float time = PlatformUtils::GetTime();
+			Timestep ts = time - m_LastFrameTime;
+			m_LastFrameTime = time;
 
 			for (Layer* layer : m_LayerStack)
 			{
-				layer->OnUpdate(0.0f);
+				layer->OnUpdate(ts);
 			}
 
 			for (Layer* layer : m_LayerStack)
 			{
 				layer->OnRender();
 			}
+
+			m_MainWindow->Update();
 		}
 
 		CleanUp();
@@ -88,6 +107,9 @@ namespace Color
 			delete layer;
 		}
 		m_LayerStack = LayerStack{}; // Will deconstruct old layer stack (so the vector gets cleared)
+
+		Renderer::Shutdown();
+		m_MainWindow->Destroy();
 	}
 
 	void Application::OnEvent(Event& e)
@@ -115,7 +137,7 @@ namespace Color
 
 	bool Application::OnWindowResize(WindowResizedEvent& e)
 	{
-		// TODO: Resize stuff
+		Renderer::SetViewport(0, 0, e.GetSizeX(), e.GetSizeY());
 		return false;
 	}
 

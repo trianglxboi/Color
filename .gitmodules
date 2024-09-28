@@ -4,3 +4,12 @@
 [submodule "Color/ThirdParty/glm"]
 	path = Color/ThirdParty/glm
 	url = https://github.com/g-truc/glm
+[submodule "Color/ThirdParty/yaml-cpp"]
+	path = Color/ThirdParty/yaml-cpp
+	url = https://gitlab.com/color-engine/yamlcpp.git
+[submodule "Color/ThirdParty/GLFW"]
+	path = Color/ThirdParty/GLFW
+	url = https://gitlab.com/color-engine/glfw
+[submodule "Color/ThirdParty/Glad"]
+	path = Color/ThirdParty/Glad
+	url = https://gitlab.com/color-engine/glad

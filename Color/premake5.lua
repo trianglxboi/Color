@@ -22,7 +22,17 @@ project "Color"
 
 		"%{IncludeDir.fmt}",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.yamlcpp}",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
+	}
+
+	links
+	{
+		"yaml-cpp",
+		"GLFW",
+		"Glad"
 	}
 
 	filter "architecture:x64"
