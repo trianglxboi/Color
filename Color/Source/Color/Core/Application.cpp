@@ -154,8 +154,7 @@ namespace Color
 
 	void Application::Exit(int exitcode)
 	{
-		// TODO: Use PlatformUtils when we have one.
-		std::exit(exitcode);
+		PlatformUtils::Exit(exitcode);
 	}
 
 	void Application::PushLayer(Layer* layer)

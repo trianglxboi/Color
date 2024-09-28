@@ -219,7 +219,19 @@ namespace Color
 
 	bool GenericWindow::Destroy()
 	{
-		return false;
+		if (!IsOpen())
+		{
+			return false;
+		}
+
+		glfwDestroyWindow(m_Handle);
+		if (--s_WindowCount == 0)
+		{
+			CL_CORE_TRACE("No remanining windows left, terminating GLFW.");
+			glfwTerminate();
+		}
+
+		return true;
 	}
 
 	void GenericWindow::RequestAttention()
