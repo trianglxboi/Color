@@ -35,6 +35,12 @@ project "Color"
 		"Glad"
 	}
 
+	defines
+	{
+		"YAML_CPP_STATIC_DEFINE",
+		"GLFW_INCLUDE_NONE"
+	}
+
 	filter "architecture:x64"
 		defines
 		{

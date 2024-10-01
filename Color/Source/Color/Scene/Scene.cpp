@@ -5,12 +5,28 @@
 
 namespace Color
 {
-	Scene::Scene()
+	Scene::Scene(const std::string& name)
+		: m_Name(name)
 	{
 	}
 
 	Scene::~Scene()
 	{
+	}
+
+	Ref<Scene> Scene::Copy(Ref<Scene>& scene, std::string_view name)
+	{
+		Ref<Scene> newScene = CreateRef<Scene>();
+
+		for (auto&& [id, entity] : scene->m_Entities)
+		{
+			Color::Entity entity = scene->DuplicateEntity(id);
+			entity.m_Scene = newScene.get();
+			newScene->m_Entities[entity.GetID()] = std::move(scene->m_Entities[entity.GetID()]);
+			scene->m_Entities.erase(entity.GetID());
+		}
+
+		return newScene;
 	}
 
 	void Scene::StartRuntime()

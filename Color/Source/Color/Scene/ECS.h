@@ -86,6 +86,8 @@ namespace Color
 			{
 				return Components.find(T::GetCompTypeId()) != Components.end();
 			}
+
+			size_t GetNumComponents() const { return Components.size(); }
 		};
 	}
 }

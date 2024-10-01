@@ -12,6 +12,12 @@ namespace Color
 	public:
 		virtual ~FileSystem() = default;
 
+		static std::string WithoutFilename(std::string_view filepath);
+		static void RemoveFilename(std::string& filepath);
+
+		static std::string GetFileExtension(std::string_view filepath);
+		static std::string CombinePaths(std::string_view lhs, std::string_view rhs, char preferredSeperator = '/');
+
 		static bool Exists(std::string_view path) { return s_NativeInstance->Exists_(path); }
 		static bool IsFile(std::string_view path) { return s_NativeInstance->IsFile_(path); }
 		static bool IsDirectory(std::string_view path) { return s_NativeInstance->IsDirectory_(path); }

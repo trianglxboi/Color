@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Asset/Asset.h"
+
 #include "Scene/Entity.h"
 #include "Misc/Timestep.h"
 
@@ -7,11 +9,16 @@
 
 namespace Color
 {
-	class Scene
+	class Scene : public Asset
 	{
 	public:
-		Scene();
+		CL_ASSET_CLASS_IMPL(Scene);
+	public:
+		Scene(const std::string& name = "Untitled");
 		~Scene();
+
+		// Creates an identical copy of the given scene.
+		static Ref<Scene> Copy(Ref<Scene>& scene, std::string_view name = nullptr);
 
 		void StartRuntime();
 		void UpdateRuntime(Timestep ts);
@@ -40,12 +47,19 @@ namespace Color
 
 		ECS::Entity* GetEntityRef(ECS::EntityID id);
 
+		const std::string& GetName() const { return m_Name; }
+		void SetName(std::string_view name) { m_Name = name; }
+
 		bool IsRunning() const { return m_Running; }
 		bool IsPaused() const { return m_Paused; }
 	private:
+		std::string m_Name;
+
 		bool m_Running = false;
 		bool m_Paused = false;
 
 		std::unordered_map<ECS::EntityID, ECS::Entity> m_Entities;
+	private:
+		friend class SceneSerializer;
 	};
 }

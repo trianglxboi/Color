@@ -71,5 +71,7 @@ namespace Color
 	private:
 		const Scene* m_Scene = nullptr;
 		ECS::EntityID m_ID = 0;
+	private:
+		friend class Scene;
 	};
 }

@@ -54,7 +54,6 @@ namespace Color
 
 	void OpenGLRendererAPI::SetViewport(int32_t x, int32_t y, uint32_t width, uint32_t height)
 	{
-		checkf(width * height != 0, "Neither width nor the viewport of the viewport can be zero!");
 		glViewport(x, y, width, height);
 	}
 
