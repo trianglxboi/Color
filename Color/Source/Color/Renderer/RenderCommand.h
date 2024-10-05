@@ -39,6 +39,16 @@ namespace Color
 		{
 			s_RendererAPI->Clear();
 		}
+
+		static void DrawLines(const Ref<VertexArray>& vertexArray, size_t vertexCount)
+		{
+			s_RendererAPI->DrawLines(vertexArray, vertexCount);
+		}
+
+		static void DrawIndexed(const Ref<VertexArray>& vertexArray, size_t indexCount = 0)
+		{
+			s_RendererAPI->DrawIndexed(vertexArray, indexCount);
+		}
 	private:
 		inline static Scope<RendererAPI> s_RendererAPI = nullptr;
 	};

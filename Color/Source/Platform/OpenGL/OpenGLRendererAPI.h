@@ -16,5 +16,8 @@ namespace Color
 		virtual void SetClearColor(const glm::vec4& color) override;
 		virtual void SetLineWidth(float width) override;
 		virtual void Clear() override;
+
+		virtual void DrawLines(const Ref<VertexArray>& vertexArray, size_t vertexCount) override;
+		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray, size_t indexCount = 0) override;
 	};
 }
