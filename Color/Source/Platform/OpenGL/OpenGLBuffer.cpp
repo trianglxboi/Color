@@ -7,14 +7,14 @@ namespace Color
 {
 	OpenGLVertexBuffer::OpenGLVertexBuffer(const float* vertices, size_t size)
 	{
-		glGenBuffers(1, &m_RendererID);
+		glCreateBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 		glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr) size, vertices, GL_STATIC_DRAW);
 	}
 
 	OpenGLVertexBuffer::OpenGLVertexBuffer(size_t size)
 	{
-		glGenBuffers(1, &m_RendererID);
+		glCreateBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 		glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr) size, nullptr, GL_DYNAMIC_DRAW);
 	}
@@ -48,7 +48,7 @@ namespace Color
 	OpenGLIndexBuffer::OpenGLIndexBuffer(const uint32_t* indices, size_t count)
 		: m_Count(count)
 	{
-		glGenBuffers(1, &m_RendererID);
+		glCreateBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)(count * sizeof(uint32_t)), indices, GL_STATIC_DRAW);
 	}

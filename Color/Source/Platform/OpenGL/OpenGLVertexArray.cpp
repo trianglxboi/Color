@@ -37,7 +37,7 @@ namespace Color
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
-		glGenVertexArrays(1, &m_RendererID);
+		glCreateVertexArrays(1, &m_RendererID);
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
@@ -65,7 +65,7 @@ namespace Color
 		const BufferLayout& layout = vertexBuffer->GetLayout();
 		for (const BufferElement& element : layout)
 		{
-			glEnableVertexAttribArray(m_VertexBufferIndex);
+			glEnableVertexAttribArray((GLuint) m_VertexBufferIndex);
 
 			switch (element.Type)
 			{
@@ -76,11 +76,11 @@ namespace Color
 			{
 				glVertexAttribPointer
 				(
-					m_VertexBufferIndex,
+					(GLuint) m_VertexBufferIndex,
 					element.GetComponentCount(),
 					ShaderDataTypeToOpenGLType(element.Type),
 					element.Normalized ? GL_TRUE : GL_FALSE,
-					layout.GetStride(),
+					(GLsizei) layout.GetStride(),
 					(const void*) element.Offset
 				);
 
@@ -94,10 +94,10 @@ namespace Color
 			{
 				glVertexAttribIPointer
 				(
-					m_VertexBufferIndex,
+					(GLuint) m_VertexBufferIndex,
 					element.GetComponentCount(),
 					ShaderDataTypeToOpenGLType(element.Type),
-					layout.GetStride(),
+					(GLsizei) layout.GetStride(),
 					(const void*)element.Offset
 				);
 
@@ -111,14 +111,14 @@ namespace Color
 				{
 					glVertexAttribPointer
 					(
-						m_VertexBufferIndex,
+						(GLuint) m_VertexBufferIndex,
 						count,
 						ShaderDataTypeToOpenGLType(element.Type),
 						element.Normalized ? GL_TRUE : GL_FALSE,
-						layout.GetStride(),
+						(GLsizei) layout.GetStride(),
 						(const void*)(element.Offset + sizeof(float) * count * i)
 					);
-					glVertexAttribDivisor(m_VertexBufferIndex, 1);
+					glVertexAttribDivisor((GLuint) m_VertexBufferIndex, 1);
 				}
 				break;
 			}
